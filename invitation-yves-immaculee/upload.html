@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partager vos souvenirs | Yvan &amp; Immaculée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="upload-page">
+<main class="upload-shell">
+  <div class="upload-panel">
+    <p class="eyebrow">Yvan &amp; Immaculée</p>
+    <h1>Partagez vos souvenirs</h1>
+    <p class="upload-intro">Ajoutez vos photos et vidéos de la cérémonie pour que tout le monde puisse en profiter.</p>
+    <form id="mediaUploadForm">
+      <label class="media-picker" for="mediaInput">
+        <span class="media-picker-title">Choisir des photos ou vidéos</span>
+        <span class="media-picker-hint">JPG, PNG, WEBP, GIF, MP4, MOV ou WEBM</span>
+      </label>
+      <input type="file" id="mediaInput" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,video/webm" multiple>
+      <div id="selectedFiles" class="selected-files">Aucun fichier sélectionné.</div>
+      <button class="btn" type="submit" id="uploadButton">Envoyer les souvenirs</button>
+      <p id="uploadMessage" class="upload-message" role="status"></p>
+    </form>
+    <a class="upload-back" href="index.html#photosSection">Retour à l'invitation</a>
+  </div>
+</main>
+<script>
+const form = document.getElementById('mediaUploadForm');
+const input = document.getElementById('mediaInput');
+const selectedFiles = document.getElementById('selectedFiles');
+const message = document.getElementById('uploadMessage');
+const button = document.getElementById('uploadButton');
+
+input.addEventListener('change', () => {
+  const count = input.files.length;
+  selectedFiles.textContent = count === 0
+    ? 'Aucun fichier sélectionné.'
+    : `${count} fichier(s) sélectionné(s).`;
+});
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if(input.files.length === 0){
+    message.textContent = 'Choisissez au moins un fichier.';
+    return;
+  }
+  button.disabled = true;
+  message.textContent = 'Envoi en cours...';
+  const data = new FormData();
+  Array.from(input.files).forEach(file => data.append('media[]', file));
+  try{
+    const response = await fetch('api/upload.php', { method: 'POST', body: data });
+    const result = await response.json();
+    if(!response.ok) throw new Error(result.error || 'Echec de l’envoi.');
+    message.textContent = `${result.uploaded} fichier(s) ajouté(s), merci !`;
+    input.value = '';
+    selectedFiles.textContent = 'Aucun fichier sélectionné.';
+  }catch(error){
+    message.textContent = error.message;
+  }finally{
+    button.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
