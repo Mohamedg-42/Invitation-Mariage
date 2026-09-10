@@ -11,9 +11,9 @@ return [
     ],
     'cloudinary' => [
         // Retrouve ces valeurs sur https://console.cloudinary.com → Dashboard
-        'cloud_name'    => 'COLLER_TON_CLOUD_NAME',
-        'api_key'       => 'COLLER_TON_API_KEY',
-        'api_secret'    => 'COLLER_TON_API_SECRET',
+        'cloud_name'    => 'yckdia0t',
+        'api_key'       => '833693642819547',
+        'api_secret'    => 'KmXKex61zeaaqt171bAmGYAx7BM',
         // Dossier où seront stockés les médias dans ton Cloud Cloudinary
         'folder'        => 'mariage-yves-immaculee'
     ]
