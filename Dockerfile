@@ -16,19 +16,14 @@ COPY invitation-yves-immaculee/ /var/www/html/
 
 # Créer le dossier uploads avec les bonnes permissions
 RUN mkdir -p /var/www/html/uploads \
-    && chown -R www-data:www-data /var/www/html/uploads \
-    && chmod -R 755 /var/www/html/uploads
-
-# Créer le dossier uploads pour les RSVPs
-RUN chown -R www-data:www-data /var/www/html \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Configuration Apache : autoriser .htaccess et AllowOverride
-RUN sed -i 's|/var/www/html|/var/www/html|g' /etc/apache2/sites-available/000-default.conf \
-    && sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
+# Autoriser .htaccess (AllowOverride All)
+RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 
-# Exposer le port 80
-EXPOSE 80
+# Script de démarrage : Railway injecte $PORT, on configure Apache dynamiquement
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Démarrer Apache
-CMD ["apache2-foreground"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
