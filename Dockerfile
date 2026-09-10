@@ -22,5 +22,6 @@ RUN mkdir -p /var/www/html/uploads \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Railway injecte $PORT dynamiquement — on reconfigure Apache au démarrage
-CMD bash -c "sed -i \"s/Listen 80/Listen \${PORT:-80}/g\" /etc/apache2/ports.conf && sed -i \"s/*:80>/*:\${PORT:-80}>/g\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"
+# Render utilise le port 10000 par défaut (variable $PORT = 10000)
+# On configure Apache pour écouter sur ce port au démarrage
+CMD bash -c "sed -i \"s/Listen 80/Listen \${PORT:-10000}/g\" /etc/apache2/ports.conf && sed -i \"s/*:80>/*:\${PORT:-10000}>/g\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"
