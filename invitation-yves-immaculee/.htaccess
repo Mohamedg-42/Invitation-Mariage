@@ -1,0 +1,23 @@
+Options -Indexes
+Options +FollowSymLinks
+
+# Activer le moteur de réécriture
+RewriteEngine On
+
+# Autoriser les requêtes CORS pour les API
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# Bloquer l'accès direct au dossier api/config.php
+<FilesMatch "^config\.(php|example\.php)$">
+    Require all denied
+</FilesMatch>
+
+# Rediriger vers index.html pour les routes non trouvées (SPA)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteRule ^ index.html [L]

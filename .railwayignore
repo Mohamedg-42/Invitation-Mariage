@@ -1,0 +1,5 @@
+# Ignorer les fichiers inutiles pour Railway
+.git
+.gitignore
+*.md
+.vscode
