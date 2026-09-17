@@ -1,6 +1,6 @@
-# Yves & Immaculée — Cérémonie de dot
+# Yvann & Immaculée — Cérémonie de dot
 
-Site web d'invitation interactive pour la cérémonie de dot de Yves et Immaculée.
+Site web d'invitation interactive pour la cérémonie de dot de Yvann et Immaculée.
 
 ## 💍 Fonctionnalités
 - **Enveloppe interactive** pour ouvrir le faire-part
@@ -12,4 +12,4 @@ Site web d'invitation interactive pour la cérémonie de dot de Yves et Immacul�
 
 ## 🚀 Déploiement
 Le projet est configuré avec un `Dockerfile` compatible avec Railway et Render (serveur Apache + PHP).
-Le code du site se trouve dans le dossier `invitation-yves-immaculee/`.
+Le code du site se trouve dans le dossier `invitation-yvann-immaculee/`.

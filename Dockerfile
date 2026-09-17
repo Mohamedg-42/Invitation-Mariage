@@ -15,7 +15,7 @@ RUN a2enmod rewrite headers
 RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 
 # Copier le contenu du projet dans le répertoire web Apache
-COPY invitation-yves-immaculee/ /var/www/html/
+COPY invitation-yvann-immaculee/ /var/www/html/
 
 # Créer le dossier uploads avec les bonnes permissions
 RUN mkdir -p /var/www/html/uploads \

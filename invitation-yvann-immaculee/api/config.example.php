@@ -15,6 +15,6 @@ return [
         'api_key'       => 'COLLER_TON_API_KEY',
         'api_secret'    => 'COLLER_TON_API_SECRET',
         // Dossier où seront stockés les médias dans ton Cloud Cloudinary
-        'folder'        => 'mariage-yves-immaculee'
+        'folder'        => 'mariage-yvann-immaculee'
     ]
 ];
